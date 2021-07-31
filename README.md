@@ -1,46 +1,57 @@
-# Getting Started with Create React App
+# Whatsapp Clone	
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This Project is a Real World Clone of whatsapp with Features Like Group Messages, One to One Messages.
 
-## Available Scripts
+## Technologies used
+* Nodejs
+* TypeScript
+* Express.js
+* React.js
+* MongoDB
 
-In the project directory, you can run:
+## Setup
+### Backend :
+* Change the Directory to `whatsapp-backend` by typing command `cd whatsapp-backend` from Repository root.
+* Download the NPM Modules by writing command `npm install` or `yarn install` Depending on your Package Manager
+* use the .env file for your config and store the Values in `Key-Value` Pair.
+* Sample Frontend .env is Given Below
+```
+	SOMEVAR="somevalue"
+	ANOTHERVAR="anothervalue"
+```
 
-### `yarn start`
+### Frontend :
+* Change the Directory to `whatsapp-frontend` by typing command `cd whatsapp-frontend` from Repository root.
+* Download the NPM Modules by writing command `npm install` or `yarn install` Depending on your Package Manager
+* use the .env file for your config and store the Values in `Key-Value` Pair.
+* Sample Frontend .env is Given Below
+```
+	SOMEVAR="somevalue"
+	ANOTHERVAR="anothervalue"
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Debugging App
+### Backend :
+* Change Directory to whatsapp-backend by typing command `cd whatsapp-backend` from Repository root.
+* Run the Backend Server by typing command `yarn dev` or `npm run dev` depending on your Package Manager.
+* Console Output will come of address of your Server means your server is Running.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Frontend :
+* Change Directory to whatsapp-frontend by typing command `cd whatsapp-frontend` from Repository root.
+* Run the Frontend Development Server by typing command `yarn start` or `npm run start` depending on your Package Manager.
+* Console Output will come of address of your Server means your Frontend Development server is Running.
 
-### `yarn test`
+## Building App
+Building the Optimized Build for Production.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Backend :
 
-### `yarn build`
+* Change Directory to whatsapp-backend by typing command `cd whatsapp-backend` from Repository root.
+* Build the Backend Server Files by typing command `yarn build` or `npm run build` depending on your Package Manager.
+* Build files will be Generated Which will be ready for Deployment.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Frontend :
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+* Change Directory to whatsapp-frontend by typing command `cd whatsapp-frontend` from Repository root.
+* Build the Backend Server Files by typing command `yarn build` or `npm run build` depending on your Package Manager.
+* Build files will be Generated Which will be ready for Deployment.
