@@ -4,7 +4,7 @@ import { createUserHandler } from "./controller/user.controller";
 import { createUserSessionHandler, invalidateUserSessionHandler } from "./controller/session.controller";
 import { createUserSchema, createUserSessionSchema } from "./schema/user.schema";
 import log from "./logger";
-import requiresUser from "./middleware/requiresUser";
+import requiresSession from "./middleware/requiresUser";
 
 export default function (app: Application) {
 	//Health Check
@@ -21,7 +21,7 @@ export default function (app: Application) {
 	app.post("/api/sessions", validateRequest(createUserSessionSchema), createUserSessionHandler);
 
 	//Logout
-	app.delete("/api/sessions", requiresUser, invalidateUserSessionHandler);
+	app.delete("/api/sessions", requiresSession, invalidateUserSessionHandler);
 
 
 	//Messages

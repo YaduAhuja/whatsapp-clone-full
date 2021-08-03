@@ -16,15 +16,14 @@ export async function createUserSessionHandler(req: Request, res: Response) {
 	const session = await createSession(user._id, req.get("user-agent") || "");
 
 	//Returning Both Back
-	return res.send(session.valid);
+	return res.send({ id: session._id, valid: session.valid });
 }
 
 export async function invalidateUserSessionHandler(
 	req: Request,
 	res: Response
 ) {
-	const sessionId = get(req, "user.session");
-
+	const sessionId = get(req, "headers.session");
 	await updateSession({ _id: sessionId }, { valid: false });
 
 	return res.sendStatus(200);
