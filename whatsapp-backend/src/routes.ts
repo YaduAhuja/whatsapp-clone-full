@@ -1,10 +1,11 @@
 import { Application, Request, Response } from "express";
 import { validateRequest } from "./middleware";
 import { createUserHandler } from "./controller/user.controller";
-import { createUserSessionHandler, invalidateUserSessionHandler } from "./controller/session.controller";
+import { createUserSessionHandler, invalidateUserSessionHandler, validateUserSessionHandler } from "./controller/session.controller";
 import { createUserSchema, createUserSessionSchema } from "./schema/user.schema";
 import log from "./logger";
-import requiresSession from "./middleware/requiresUser";
+import requiresSession from "./middleware/requiresSession";
+import { createSessionSchema } from "./schema/session.schema";
 
 export default function (app: Application) {
 	//Health Check
@@ -18,7 +19,11 @@ export default function (app: Application) {
 	app.post("/api/users", validateRequest(createUserSchema), createUserHandler);
 
 	//Login
-	app.post("/api/sessions", validateRequest(createUserSessionSchema), createUserSessionHandler);
+	//Login with Email And Password
+	app.post("/api/login", validateRequest(createUserSessionSchema), createUserSessionHandler);
+
+	//Login with Session
+	app.post("/api/sessions", validateRequest(createSessionSchema), validateUserSessionHandler);
 
 	//Logout
 	app.delete("/api/sessions", requiresSession, invalidateUserSessionHandler);

@@ -18,3 +18,7 @@ export async function updateSession(
 export async function findSessions(query: FilterQuery<SessionDocument>) {
 	return Session.find(query).lean();
 }
+
+export async function findSessionById(sessionId: string) {
+	return Session.findById(sessionId).lean();
+}

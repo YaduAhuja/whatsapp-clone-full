@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import log from "../logger";
 import { validatePassword } from "../service/user.service";
 import { get } from "lodash";
-import { createSession, updateSession } from "../service/session.service";
+import { createSession, updateSession, findSessionById } from "../service/session.service";
 
 export async function createUserSessionHandler(req: Request, res: Response) {
 	//Validate the User Email & Password
@@ -17,6 +17,12 @@ export async function createUserSessionHandler(req: Request, res: Response) {
 
 	//Returning Both Back
 	return res.send({ id: session._id, valid: session.valid });
+}
+
+export async function validateUserSessionHandler(req: Request, res: Response) {
+	const session = await findSessionById(req.body.session);
+	if (!session || !session.valid) return res.status(403).send("Session Expired");
+	return res.sendStatus(200);
 }
 
 export async function invalidateUserSessionHandler(
