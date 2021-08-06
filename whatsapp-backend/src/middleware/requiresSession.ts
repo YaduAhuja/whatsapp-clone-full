@@ -2,7 +2,7 @@ import { get } from "lodash";
 import { Request, Response, NextFunction } from "express";
 import log from "../logger";
 
-export default async function requiresMessage(
+export default async function requiresSession(
 	req: Request,
 	res: Response,
 	next: NextFunction

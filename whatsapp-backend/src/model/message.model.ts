@@ -5,7 +5,7 @@ import { UserDocument } from "./user.model";
 export interface MessageDocument extends mongoose.Document {
 	user: UserDocument["_id"];
 	chatId: ChatRoomDocument["_id"];
-	body: string;
+	data: string;
 	createdAt: Date;
 }
 
@@ -13,7 +13,7 @@ const PostSchema = new mongoose.Schema(
 	{
 		user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 		chatId: { type: mongoose.Schema.Types.ObjectId, ref: "ChatRoom" },
-		body: { type: String, required: true },
+		data: { type: String, required: true },
 	},
 	{ timestamps: true }
 );

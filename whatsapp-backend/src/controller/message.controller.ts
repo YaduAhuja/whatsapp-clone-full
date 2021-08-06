@@ -4,8 +4,10 @@ import { createMessage } from "../service/message.service";
 
 export async function createMessageHandler(req: Request, res: Response, next: NextFunction) {
 	try {
-		const message = await createMessage(req.body);
-		req.body["messageId"] = message.id;
+		// console.log(req);
+		const message = await createMessage(req.body.message);
+		console.log(message);
+		req.body.message.messageId = message._id;
 		return next();
 	} catch (err) {
 		log.error(err);

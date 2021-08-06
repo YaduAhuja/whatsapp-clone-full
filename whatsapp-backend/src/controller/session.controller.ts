@@ -25,7 +25,10 @@ export async function validateUserSessionHandler(req: Request, res: Response, ne
 	if (!session) res.status(403).send("Session Not Found");
 	session = await findSessionById(session);
 	if (!session || !session.valid) return res.status(403).send("Session Expired");
-	if (next) return next();
+	if (next) {
+		// console.log(next.toString());
+		return next();
+	}
 	return res.sendStatus(200);
 }
 
