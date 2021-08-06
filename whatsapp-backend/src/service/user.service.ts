@@ -1,5 +1,6 @@
 import { omit } from "lodash";
-import { DocumentDefinition, FilterQuery, UpdateQuery } from "mongoose";
+import { DocumentDefinition, FilterQuery } from "mongoose";
+import { ChatRoomDocument } from "../model/chatroom.model";
 import User, { UserDocument } from "../model/user.model";
 
 export async function createUser(input: DocumentDefinition<UserDocument>) {
@@ -12,6 +13,18 @@ export async function createUser(input: DocumentDefinition<UserDocument>) {
 
 export async function findUser(query: FilterQuery<UserDocument>) {
 	return User.findOne(query).lean();
+}
+
+export async function findUserById(userId: UserDocument["_id"]) {
+	return User.findById(userId);
+}
+
+export async function addChatInUser(userId: UserDocument["_id"], chatId: ChatRoomDocument["_id"]) {
+	return User.findByIdAndUpdate(userId, {
+		$push: {
+			chats: chatId
+		}
+	});
 }
 
 export async function validatePassword({

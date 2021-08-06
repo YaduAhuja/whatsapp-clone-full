@@ -1,6 +1,6 @@
 import { Application, Request, Response } from "express";
 import { validateRequest } from "./middleware";
-import { createUserHandler } from "./controller/user.controller";
+import { addChatsInUser, createUserHandler } from "./controller/user.controller";
 import { createUserSessionHandler, invalidateUserSessionHandler, validateUserSessionHandler } from "./controller/session.controller";
 import { createUserSchema, createUserSessionSchema } from "./schema/user.schema";
 import requiresSession from "./middleware/requiresSession";

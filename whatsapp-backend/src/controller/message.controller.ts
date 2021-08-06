@@ -6,7 +6,6 @@ export async function createMessageHandler(req: Request, res: Response, next: Ne
 	try {
 		// console.log(req);
 		const message = await createMessage(req.body.message);
-		console.log(message);
 		req.body.message.messageId = message._id;
 		return next();
 	} catch (err) {

@@ -7,7 +7,7 @@ export interface UserDocument extends mongoose.Document {
 	password: string;
 	createdAt: Date;
 	updatedAt: Date;
-	chats: Array<ChatRoomDocument>;
+	chats: Array<ChatRoomDocument["_id"]>;
 	comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
@@ -15,7 +15,8 @@ const UserSchema = new mongoose.Schema(
 	{
 		email: { type: String, required: true, unique: true },
 		name: { type: String, required: true },
-		password: { type: String, required: true }
+		password: { type: String, required: true },
+		chats: { type: [mongoose.Schema.Types.ObjectId], ref: "ChatRoom" }
 	},
 	{ timestamps: true }
 );
