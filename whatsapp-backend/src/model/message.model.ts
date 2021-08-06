@@ -1,24 +1,19 @@
 import mongoose from "mongoose";
-import { nanoid } from "nanoid";
+import { ChatRoomDocument } from "./chatroom.model";
 import { UserDocument } from "./user.model";
 
 export interface MessageDocument extends mongoose.Document {
 	user: UserDocument["_id"];
+	chatId: ChatRoomDocument["_id"];
 	body: string;
 	createdAt: Date;
-	updatedAt: Date;
 }
 
 const PostSchema = new mongoose.Schema(
 	{
-		postId: {
-			type: String,
-			required: true,
-			unique: true,
-			default: () => nanoid(10),
-		},
 		user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-		body: { type: String, default: true },
+		chatId: { type: mongoose.Schema.Types.ObjectId, ref: "ChatRoom" },
+		body: { type: String, required: true },
 	},
 	{ timestamps: true }
 );

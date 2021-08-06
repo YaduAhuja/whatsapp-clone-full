@@ -1,12 +1,13 @@
 import mongoose from "mongoose";
-
+import { ChatRoomDocument } from "./chatroom.model";
 
 export interface UserDocument extends mongoose.Document {
-	email: string,
-	name: string,
-	password: string,
-	createdAt: Date,
-	updatedAt: Date,
+	email: string;
+	name: string;
+	password: string;
+	createdAt: Date;
+	updatedAt: Date;
+	chats: Array<ChatRoomDocument>;
 	comparePassword(candidatePassword: string): Promise<boolean>;
 }
 

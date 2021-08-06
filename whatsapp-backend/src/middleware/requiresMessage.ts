@@ -7,8 +7,8 @@ export default async function requiresMessage(
 	res: Response,
 	next: NextFunction
 ) {
-	const session = get(req, "headers.session");
-	if (!session) {
+	const message = get(req, "body.message");
+	if (!message) {
 		return res.sendStatus(403);
 	}
 

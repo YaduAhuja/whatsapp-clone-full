@@ -6,6 +6,9 @@ import { createUserSchema, createUserSessionSchema } from "./schema/user.schema"
 import log from "./logger";
 import requiresSession from "./middleware/requiresSession";
 import { createSessionSchema } from "./schema/session.schema";
+import { addMessageHandler, validateChatRoomHandler } from "./controller/chatroom.controller";
+import { createMessageHandler } from "./controller/message.controller";
+import requiresMessage from "./middleware/requiresMessage";
 
 export default function (app: Application) {
 	//Health Check
@@ -23,17 +26,12 @@ export default function (app: Application) {
 	app.post("/api/login", validateRequest(createUserSessionSchema), createUserSessionHandler);
 
 	//Login with Session
-	app.post("/api/sessions", validateRequest(createSessionSchema), validateUserSessionHandler);
+	app.post("/api/sessions", requiresSession, validateUserSessionHandler);
 
 	//Logout
 	app.delete("/api/sessions", requiresSession, invalidateUserSessionHandler);
 
 
 	//Messages
-	app.post("/message", (req: Request, res: Response) => {
-		log.info(req.body);
-		log.info(req.headers);
-		res.sendStatus(200);
-	});
-
+	app.post("/api/message", requiresSession, validateUserSessionHandler, requiresMessage, validateChatRoomHandler, createMessageHandler, addMessageHandler);
 }
