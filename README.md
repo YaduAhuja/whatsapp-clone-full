@@ -16,8 +16,9 @@ This Project is a Real World Clone of whatsapp with Features Like Group Messages
 * use the .env file for your config and store the Values in `Key-Value` Pair.
 * Sample Frontend .env is Given Below
 ```
-	SOMEVAR="somevalue"
-	ANOTHERVAR="anothervalue"
+	PORT=<PORT_ADDRESS>
+	HOST=<HOSTNAME>
+	DB_CONNECTION_STRING=<DB_CONNECTION_STRING>
 ```
 
 ### Frontend :
