@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { omit } from "lodash";
+import { omit, get } from "lodash";
 import log from "../logger";
 import { ChatRoomDocument } from "../model/chatroom.model";
 import { UserDocument } from "../model/user.model";
-import { createUser } from "../service/user.service";
+import { addChatInUser, createUser, findUserById } from "../service/user.service";
 
 export async function createUserHandler(req: Request, res: Response) {
 	try {
@@ -15,12 +15,26 @@ export async function createUserHandler(req: Request, res: Response) {
 	}
 }
 
-export async function addChatsInUser(users: Array<UserDocument["_id"]>, chatId: ChatRoomDocument["_id"]) {
+export async function addChatInUsers(users: Array<UserDocument["_id"]>, chatId: ChatRoomDocument["_id"]) {
 	try {
-		users.forEach((userId) => {
-			addChatsInUser(userId, chatId);
+		users.forEach(user => {
+			log.info("User :" + user);
+			addChatInUser(user, chatId);
 		});
 	} catch (err) {
 		log.error(err);
 	}
+}
+
+
+export async function getChatsOfUser(req: Request, res: Response) {
+	try {
+		const id = await get(req, "headers.user");
+		const user = await findUserById(id);
+		if (!id || !user) res.status(403).send("User not Found");
+		req.headers.chats = user?.chats;
+	} catch (err) {
+		log.error(err);
+	}
+
 }

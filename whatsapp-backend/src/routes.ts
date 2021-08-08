@@ -1,7 +1,7 @@
 import { Application, Request, Response } from "express";
 import { validateRequest } from "./middleware";
-import { addChatsInUser, createUserHandler } from "./controller/user.controller";
-import { createUserSessionHandler, invalidateUserSessionHandler, validateUserSessionHandler } from "./controller/session.controller";
+import { createUserHandler, getChatsOfUser } from "./controller/user.controller";
+import { createUserSessionHandler, getUserIdFromSession, invalidateUserSessionHandler, validateUserSessionHandler, validateUserSessionHandlerNext } from "./controller/session.controller";
 import { createUserSchema, createUserSessionSchema } from "./schema/user.schema";
 import requiresSession from "./middleware/requiresSession";
 import { addMessageHandler, validateChatRoomHandler } from "./controller/chatroom.controller";
@@ -31,5 +31,8 @@ export default function (app: Application) {
 
 	//Messages
 	//UserSession Handler is still to be modified for both purposes with and without next function
-	app.post("/api/message", requiresSession, validateUserSessionHandler, requiresMessage, validateChatRoomHandler, createMessageHandler, addMessageHandler);
+	app.post("/api/message", requiresSession, validateUserSessionHandlerNext, requiresMessage, validateChatRoomHandler, createMessageHandler, addMessageHandler);
+
+
+	// app.get("/api/message", requiresSession, validateUserSessionHandler, getUserIdFromSession, getChatsOfUser, )
 }

@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import log from "../logger";
-import { createMessage } from "../service/message.service";
+import { MessageDocument } from "../model/message.model";
+import { createMessage, findMessageById } from "../service/message.service";
 
 export async function createMessageHandler(req: Request, res: Response, next: NextFunction) {
 	try {
@@ -12,4 +13,9 @@ export async function createMessageHandler(req: Request, res: Response, next: Ne
 		log.error(err);
 		return res.status(409).send(err.message);
 	}
+}
+
+
+export async function getMessageHandler(messageId: MessageDocument["_id"]) {
+	return findMessageById(messageId);
 }

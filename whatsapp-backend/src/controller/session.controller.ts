@@ -20,15 +20,22 @@ export async function createUserSessionHandler(req: Request, res: Response) {
 	return res.send({ id: session._id, valid: session.valid });
 }
 
-export async function validateUserSessionHandler(req: Request, res: Response, next: NextFunction) {
+export async function validateUserSessionHandlerNext(req: Request, res: Response, next: NextFunction) {
 	let session = get(req, "headers.session");
 	if (!session) res.status(403).send("Session Not Found");
 	session = await findSessionById(session);
 	if (!session || !session.valid) return res.status(403).send("Session Expired");
 	if (next) {
-		// console.log(next.toString());
 		return next();
 	}
+	return res.sendStatus(200);
+}
+
+export async function validateUserSessionHandler(req: Request, res: Response) {
+	let session = get(req, "headers.session");
+	if (!session) res.status(403).send("Session Not Found");
+	session = await findSessionById(session);
+	if (!session || !session.valid) return res.status(403).send("Session Expired");
 	return res.sendStatus(200);
 }
 
@@ -40,4 +47,14 @@ export async function invalidateUserSessionHandler(
 	await updateSession({ _id: sessionId }, { valid: false });
 
 	return res.sendStatus(200);
+}
+
+
+export async function getUserIdFromSession(req: Request, res: Response) {
+	const sessionId = get(req, "headers.session");
+	const session = await findSessionById(sessionId);
+	if (!session) {
+		res.status(403).send("Session Not Found or Expired");
+	}
+	req.headers.user = session?.user;
 }

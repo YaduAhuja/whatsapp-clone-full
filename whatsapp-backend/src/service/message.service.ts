@@ -9,3 +9,8 @@ export async function createMessage(input: DocumentDefinition<MessageDocument>) 
 		throw new Error(error);
 	}
 }
+
+
+export async function findMessageById(messageId: MessageDocument["_id"]) {
+	return Message.findById(messageId).lean();
+}
