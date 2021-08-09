@@ -25,10 +25,8 @@ export async function validateUserSessionHandlerNext(req: Request, res: Response
 	if (!session) res.status(403).send("Session Not Found");
 	session = await findSessionById(session);
 	if (!session || !session.valid) return res.status(403).send("Session Expired");
-	if (next) {
-		return next();
-	}
-	return res.sendStatus(200);
+	// log.info("Passed User Session Verification")
+	return next();
 }
 
 export async function validateUserSessionHandler(req: Request, res: Response) {
@@ -50,11 +48,12 @@ export async function invalidateUserSessionHandler(
 }
 
 
-export async function getUserIdFromSession(req: Request, res: Response) {
+export async function getUserIdFromSession(req: Request, res: Response, next: NextFunction) {
 	const sessionId = get(req, "headers.session");
 	const session = await findSessionById(sessionId);
 	if (!session) {
 		res.status(403).send("Session Not Found or Expired");
 	}
 	req.headers.user = session?.user;
+	return next();
 }

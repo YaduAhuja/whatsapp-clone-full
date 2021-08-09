@@ -1,11 +1,11 @@
 import { Application, Request, Response } from "express";
 import { validateRequest } from "./middleware";
-import { createUserHandler, getChatsOfUser } from "./controller/user.controller";
+import { createUserHandler, fetchUsersInvolvedInChat, getChatsOfUser } from "./controller/user.controller";
 import { createUserSessionHandler, getUserIdFromSession, invalidateUserSessionHandler, validateUserSessionHandler, validateUserSessionHandlerNext } from "./controller/session.controller";
 import { createUserSchema, createUserSessionSchema } from "./schema/user.schema";
 import requiresSession from "./middleware/requiresSession";
-import { addMessageHandler, validateChatRoomHandler } from "./controller/chatroom.controller";
-import { createMessageHandler } from "./controller/message.controller";
+import { addMessageHandler, fetchChatsHandler, validateChatRoomHandler } from "./controller/chatroom.controller";
+import { createMessageHandler, fetchMessagesHandler } from "./controller/message.controller";
 import requiresMessage from "./middleware/requiresMessage";
 
 export default function (app: Application) {
@@ -34,5 +34,5 @@ export default function (app: Application) {
 	app.post("/api/message", requiresSession, validateUserSessionHandlerNext, requiresMessage, validateChatRoomHandler, createMessageHandler, addMessageHandler);
 
 
-	// app.get("/api/message", requiresSession, validateUserSessionHandler, getUserIdFromSession, getChatsOfUser, )
+	app.get("/api/message", requiresSession, validateUserSessionHandlerNext, getUserIdFromSession, getChatsOfUser, fetchChatsHandler, fetchUsersInvolvedInChat, fetchMessagesHandler);
 }

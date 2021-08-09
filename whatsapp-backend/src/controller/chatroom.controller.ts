@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { get } from "lodash";
+import { get, omit } from "lodash";
+import log from "../logger";
 import { ChatRoomDocument } from "../model/chatroom.model";
 import { addMessageInChatRoom, addUserInChatRoom, createChatRoom, findChatRoomById } from "../service/chatroom.service";
 import { addChatInUsers } from "./user.controller";
@@ -27,10 +28,23 @@ export async function addMessageHandler(req: Request, res: Response) {
 	res.sendStatus(200);
 }
 
-// export async function getChatsHandler(req: Request, res: Response){
-// 	const chats = get(req, "headers.chats") as Array<ChatRoomDocument["_id"]>;
-// 	const ret = {};
-// 	chats.forEach(chat => {
-// 		ret[chat] =  
-// 	});
-// }
+
+export async function fetchChatsHandler(req: Request, res: Response, next: NextFunction) {
+	const chats = get(req, "body.chats") as Array<ChatRoomDocument["_id"]>;
+	if (!chats) res.status(403).send("Chats Not Found");
+	req.body.messages = []
+	try {
+		for (let i = 0; i < chats.length; i++)
+			req.body.messages.push(await formatDocumentForResponse(chats[i]));
+	} catch (err) {
+		res.status(403).send("Chat Fetching error");
+	}
+	// res.send(req.body.messages);
+	return next();
+}
+
+async function formatDocumentForResponse(Chat_id: ChatRoomDocument["_id"]) {
+	const chat = await findChatRoomById(Chat_id.toString());
+	if (!chat) throw new Error("Chat Not Found");
+	return omit(chat, ["body", "createdAt", "updatedAt", "__v"]);
+}

@@ -16,7 +16,7 @@ export async function findUser(query: FilterQuery<UserDocument>) {
 }
 
 export async function findUserById(userId: UserDocument["_id"]) {
-	return User.findById(userId);
+	return User.findById(userId).lean();
 }
 
 export async function addChatInUser(userId: UserDocument["_id"], chatId: ChatRoomDocument["_id"]) {
