@@ -1,16 +1,14 @@
 import React from 'react';
 import './App.css';
 
-import Sidebar from "./components/sidebar/sidebar";
-import Chatbar from "./components/Chatbar/chatbar";
+// import Sidebar from "./components/sidebar/sidebar";
+// import Chatbar from "./components/Chatbar/chatbar";
+import LoginScreen from './LoginScreen/loginScreen';
 
 function App() {
 	return (
 		<div className="app">
-			<div className = "app_body">
-				<Sidebar />
-				<Chatbar />
-			</div>
+			<LoginScreen />
 		</div>
 	);
 }

@@ -1,0 +1,13 @@
+.test{
+	height: 400px;
+	width: 100%;
+}
+
+.landing-wrapper::before{
+	background-color: #00bfa5;
+	position: absolute;
+    width: 100%;
+    height: 222px;
+	content: "";
+}
+
