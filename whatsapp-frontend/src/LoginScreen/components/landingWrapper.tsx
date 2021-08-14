@@ -1,11 +1,14 @@
 import React from "react";
+import LandingWindow from "./landingWindow";
 import "./landingWrapper.css";
 
 export default function LandingWrapper() {
 	return (
-		<div className="vody">
-			{/* <div className="test" /> */}
-			<div className="landing-wrapper" />
+		<div>
+			<div className="landing-wrapper">
+				<div className="landing-header"></div>
+				<LandingWindow />
+			</div>
 		</div>
 	)
 }
