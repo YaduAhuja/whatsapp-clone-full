@@ -4,9 +4,10 @@
     box-shadow: 0 17px 50px 0 rgb(0 0 0 / 19%), 0 12px 15px 0 rgb(0 0 0 / 24%);
 	margin-left: auto;
 	margin-right: auto;
+	margin-bottom: 92px;
     display: flex;
     flex-direction: column;
-    max-width: 1050px;
+    max-width: 910px;
     overflow: hidden;
 	z-index: 2;
 	position: relative;
@@ -59,4 +60,35 @@ svg{
 	display: inline-block;
     font-weight: 500;
     line-height: 24px;
+}
+
+.landing-main-footer{
+	display: flex;
+    height: 70px;
+    font-size: 14px;
+	justify-content: space-between;
+	align-items: flex-end;
+    line-height: 1;
+}
+
+.landing-main-footer a{
+	color: #009688;
+}
+
+.landing-main-footer > *{
+	padding: 10px;
+}
+
+.keep-signed-selector{
+    width: 264px;
+    font-size: 14px;
+    line-height: 1;
+	display: flex;
+	justify-content: center;
+    color: rgba(var(--black-rgb),.45);
+}
+
+.keep-signed-selector > input{
+	outline: rgb(252, 166, 0) solid 1px !important;
+	margin-right: 7px;
 }

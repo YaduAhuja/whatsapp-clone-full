@@ -1,4 +1,5 @@
 import React from "react";
+import LandingFooter from "./landingFooter";
 import "./landingWindow.css";
 
 export default function LandingWindow() {
@@ -29,7 +30,17 @@ export default function LandingWindow() {
 						</ol>
 					</div>
 				</div>
+				<div className="landing-main-footer">
+					<a rel="noopener noreferrer" href="https://faq.whatsapp.com/web/download-and-installation/how-to-log-in-or-out?lang=en" target="_blank">Need help to get started?</a>
+					<div className="keep-signed-selector">
+
+						<input type="checkbox" name="RememberMe" />
+						<label>Keep me Signed in</label>
+
+					</div>
+				</div>
 			</div>
+			<LandingFooter />
 		</div>
 	);
 }

@@ -1,0 +1,18 @@
+.landing-footer{
+	padding: 72px 60px;
+}
+
+.video-instructions-wrapper{
+	display: flex;
+	justify-content: center;
+}
+
+.video-instructions{
+	width: 560px;
+    height: 314px;
+}
+
+.video-instructions-img{
+	height: 100%;
+	width: 100%;
+}
